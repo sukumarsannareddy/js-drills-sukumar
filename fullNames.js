@@ -1,10 +1,6 @@
 exports.getFullNames=function getFullNames(data){
     try{
-        let fullNames=[]
-        for(let i=0;i<data['data'].length;i++){
-            fullNames.push(data['data'][i].name.join(" "))
-        }
-        return fullNames
+        return data['data'].map((object)=> object.name.join(" "))
     }catch(error){
         if(error.message.includes('undefined')){
             return "insufficent or invalid Data"
