@@ -3,17 +3,9 @@ exports.getUsersInGermany=function getUsersInGermany(users){
         if(Object.keys(users).length==0){
             return "users List is Empty"
         }else{
-            usersInGermany={}
-            for(let user in users){
-                if(users[user].nationality=='Germany'){
-                    usersInGermany[user]=users[user]
-                }
-            }
-            if(Object.keys(usersInGermany).length==0){
-                return "No user belong to Germany"
-            }else{
-                return usersInGermany
-            }
+            let getUsersInGermany={}
+            Object.keys(users).filter((object)=> users[object].nationality=="Germany").forEach((object)=> getUsersInGermany[object]=users[object])
+            return Object.keys(getUsersInGermany).length==0?"No user belongs to germay":getUsersInGermany
         }
     }catch(error){
         if(error.message.includes('undefined')){
