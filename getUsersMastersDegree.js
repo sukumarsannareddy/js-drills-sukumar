@@ -3,17 +3,9 @@ exports.getUsersMasterDegree= function getUsersMasterDegree(users){
         if(Object.keys(users).length==0){
             return "Users Lsit is Empty"
         }else{
-            userMastersDegree={}
-            for(let user in users){
-                if(users[user].qualification.includes('Masters')){
-                    userMastersDegree[user]=users[user]
-                }
-            }
-            if(Object.keys(userMastersDegree).length==0){
-                return "No user with Qualification Masters"
-            }else{
-                return userMastersDegree
-            }
+            let getUsersMasterDegree={}
+            Object.keys(users).filter((object)=> users[object].qualification.includes('Masters')).forEach((object)=> getUsersMasterDegree[object]=users[object])
+            return Object.keys(getUsersMasterDegree).length==0?"No user done masters":getUsersMasterDegree
         }
     }catch(error){
         if(error.message.includes('undefined')){
