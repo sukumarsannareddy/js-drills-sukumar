@@ -1,22 +1,17 @@
 exports.averageSalary=function averageSalary(data){
     try{
         let roles={}
-        for(let i=0;i<data['data'].length;i++){
-            if(data['data'][i].hr[0] in roles){
-                continue
+        data['data'].forEach((object) => {
+            if(!(object.hr[0] in roles)){
+                roles[object.hr[0]]=[parseInt((object.hr[1]).replace(',','').replace('$','')),1]
             }else{
-                roles[data['data'][i].hr[0]]=[0,0]
+                roles[object.hr[0]][0]+=parseInt((object.hr[1]).replace(',','').replace('$',''))
+                roles[object.hr[0]][1]+=1
             }
-        }
-        for(let i=0;i<data['data'].length;i++){
-            roles[data['data'][i].hr[0]][0]+= parseInt((data['data'][i].hr[1]).replace(',','').replace('$',''))
-            roles[data['data'][i].hr[0]][1]+=1
-        }
-        for(let role in roles){
-            roles[role]=Math.ceil(roles[role][0]/roles[role][1])
-        }
-        return JSON.stringify(roles)
-    }catch(error){
+        })
+        Object.keys(roles).forEach((object)=>roles[object]=Math.ceil(roles[object][0]/roles[object][1]))
+        return roles
+        }catch(error){
         if(error.message.includes('undefined')){
             return "insufficent or invalid Data"
         }else{
