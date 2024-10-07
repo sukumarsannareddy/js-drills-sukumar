@@ -1,11 +1,8 @@
 exports.findIdNo=function findIdNo(inventory){
     try{
-        for(let i=0;i<inventory.length;i++){
-            if(inventory[i].id==33){
-                return "Car 33 is a " +inventory[i].car_year+","+inventory[i].car_make+","+inventory[i].car_model
-            }
-        }
-        return "Id number 33 not Found"
+        let findIdNo33=inventory.filter((object)=> object.id==33)
+        return findIdNo33.length==0?"Id no 33 is not found":findIdNo33.map((object)=>
+            `Car 33 is a ${object.car_year},${object.car_make},${object.car_model}`)
     }catch(error){
         if(error.message.split(' ').includes('undefined')){
             return "Data is insufficent"
