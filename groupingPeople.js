@@ -1,16 +1,13 @@
 exports.groupingPeople=function groupingPeople(data){
     try{
         let roles={}
-        for(let i=0;i<data['data'].length;i++){
-            if(data['data'][i].hr[0] in roles){
-                continue
+        data['data'].forEach((object)=>{
+            if(object.hr[0] in roles){
+                roles[object.hr[0]].push(object.name.join(" "))
             }else{
-                roles[data['data'][i].hr[0]]=[]
+                roles[object.hr[0]]=[object.name.join(" ")]
             }
-        }
-        for(let i=0;i<data['data'].length;i++){
-            roles[data['data'][i].hr[0]].push(data['data'][i].name.join(" "))
-        }
+        })
         return JSON.stringify(roles)
     }catch(error){
         if(error.message.includes('undefined')){
