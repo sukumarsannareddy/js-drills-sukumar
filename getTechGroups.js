@@ -1,20 +1,17 @@
 exports.getTechGroups=function getTechGroups(users){
     try{
         let usersGroup={"Python" : [],"Golang" : [],"Javascript" : []}
-        let techs=["Python","Javascript","Golang"]
-        for(let user in users){
-            for(let i=0;i<techs.length;i++){
-                if(users[user].desgination.includes(techs[i])){
-                    usersGroup[techs[i]].push(users[user])
-                }
-        
+        Object.keys(users).forEach((object) => {
+            if(users[object].desgination.includes('Python')){
+                usersGroup['Python'].push(users[object])
+            }else if(users[object].desgination.includes('Golang')){
+                usersGroup['Golang'].push(users[object])
+            }else if(users[object].desgination.includes('Javascript')){
+                usersGroup['Javascript'].push(users[object])
             }
         }
-        if(usersGroup['Python'].length==0 && usersGroup['Golang'].length==0 && usersGroup['Javascript'].length==0){
-            return "user List is empty"
-        }else{
-            return usersGroup
-        }
+        );
+        return usersGroup       
     }catch(error){
         if(error.message.includes('undefined')){
             return "Insufficent or invalid data"
