@@ -3,21 +3,9 @@ exports.getvideoGamesInterestedUsers=function getvideoGamesInterestedUsers(users
         if(Object.keys(users).length==0){
             return "List is empty"
         }else{
-            interestedUsers={}
-            for(let user in users){
-                try{
-                    if(users[user].interests[0].includes('Video Games')){
-                        interestedUsers[user]=users[user]
-                    }
-                }catch(error){
-                    continue
-                }
-            }
-            if(Object.keys(interestedUsers).length==0){
-                return "No one is interested in Video Games"
-            }else{
-                return interestedUsers
-            }
+            let getUsersInterestedVideoGames={}
+            Object.keys(users).filter((object)=> String(users[object].interests).includes('Video Games')).forEach((object)=> getUsersInterestedVideoGames[object]=users[object])
+            return Object.keys(getUsersInterestedVideoGames).length==0?"No one is interested in video games":getUsersInterestedVideoGames
         }
     }catch(error){
         if(error.message.includes('undefined')){
